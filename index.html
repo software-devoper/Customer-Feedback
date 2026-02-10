@@ -1,0 +1,175 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Customer Feedback</title>
+    <style>
+      :root {
+        --bg: #f4f6fb;
+        --card: #ffffff;
+        --text: #111827;
+        --muted: #6b7280;
+        --accent: #0f766e;
+        --accent-dark: #0b5f58;
+        --border: #e5e7eb;
+        --success-bg: #ecfdf3;
+        --success-border: #b7f0c8;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: radial-gradient(1200px 600px at 10% -10%, #e9f7f6 0%, var(--bg) 40%);
+        color: var(--text);
+        font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+        line-height: 1.5;
+      }
+      .page {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 32px 16px;
+      }
+      .container {
+        width: 100%;
+        max-width: 760px;
+        background: var(--card);
+        padding: 28px 28px 32px;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        box-shadow: 0 18px 60px rgba(15, 23, 42, 0.08);
+      }
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .title {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .subtitle {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 15px;
+      }
+      .badge {
+        background: #e6fffb;
+        color: var(--accent);
+        border: 1px solid #b2f5ea;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      form { margin-top: 20px; }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .field { display: flex; flex-direction: column; gap: 6px; }
+      label { font-weight: 600; font-size: 14px; }
+      .hint { font-size: 12px; color: var(--muted); }
+      input, textarea {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-size: 15px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        background: #fff;
+      }
+      input:focus, textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+      }
+      textarea { resize: vertical; min-height: 140px; }
+      .actions {
+        margin-top: 18px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      button {
+        padding: 12px 20px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: transform 0.1s ease, background 0.2s ease;
+      }
+      button:hover { background: var(--accent-dark); }
+      button:active { transform: translateY(1px); }
+      .message {
+        margin-top: 18px;
+        padding: 12px 14px;
+        background: var(--success-bg);
+        border: 1px solid var(--success-border);
+        border-radius: 10px;
+        font-weight: 600;
+        color: #0f5132;
+      }
+      @media (max-width: 720px) {
+        .grid { grid-template-columns: 1fr; }
+        .header { flex-direction: column; align-items: flex-start; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="container">
+        <div class="header">
+          <div>
+            <h1 class="title">Customer Feedback</h1>
+            <p class="subtitle">Share your experience so we can improve our service.</p>
+          </div>
+          <span class="badge">Secure Form</span>
+        </div>
+
+        <form method="POST">
+          <div class="grid">
+            <div class="field">
+              <label for="customer_name">Customer Name</label>
+              <input type="text" id="customer_name" name="customer_name" placeholder="Optional" />
+            </div>
+            <div class="field">
+              <label for="product_name">Product or Service Name</label>
+              <input type="text" id="product_name" name="product_name" placeholder="Required" required />
+            </div>
+          </div>
+
+          <div class="field" style="margin-top: 18px;">
+            <label for="feedback_text">Feedback</label>
+            <textarea id="feedback_text" name="feedback_text" placeholder="Please share your experience..." required></textarea>
+            <span class="hint">We value your honesty. This helps us improve.</span>
+          </div>
+
+          <div class="actions">
+            <button type="submit">Submit Feedback</button>
+          </div>
+        </form>
+
+        {% if message %}
+        <div class="message" id="flash-message">{{ message }}</div>
+        {% endif %}
+      </div>
+    </div>
+    <script>
+      const flash = document.getElementById("flash-message");
+      if (flash) {
+        setTimeout(() => {
+          flash.style.display = "none";
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
