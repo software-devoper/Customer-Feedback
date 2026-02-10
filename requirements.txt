@@ -1,8 +1,9 @@
-﻿flask
-mysql-connector-python
+flask
+psycopg2-binary
 google-genai
 pydantic
 python-dotenv
 gunicorn
+
 
 
