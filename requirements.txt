@@ -3,3 +3,6 @@ mysql-connector-python
 google-genai
 pydantic
 python-dotenv
+gunicorn
+
+
